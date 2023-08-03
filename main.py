@@ -1,4 +1,7 @@
 from texttable import Texttable
+import sys
+import os
+import time
 
 
 def calculate(capital):
@@ -14,10 +17,21 @@ def calculate(capital):
     return EQUITY, ETF, BONDS
 
 if __name__ == '__main__':
-    eq, etf, bonds = calculate(2351)
+    capital = sys.argv[1]
+    eq, etf, bonds = calculate(int(capital))
     eq = round(eq, 2)
     etf = round(etf, 2)
     bonds = round(bonds, 2)
     table = Texttable()
     table.add_rows([['Equity', 'ETF', 'Securities & Bonds'], ['₹ ' + str(eq), '₹ ' + str(etf), '₹ ' + str(bonds)]])
+    os.system("clear")
     print(table.draw())
+
+    start = time.time()
+    timeout = 5
+
+    while True:
+        current = time.time()
+        if input("\n*** Hit enter for the prompt ***\n") == '':
+            break
+        
